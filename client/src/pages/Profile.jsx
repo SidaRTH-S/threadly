@@ -6,16 +6,20 @@ import {
 } from "react-router-dom";
 
 import { useAuth } from "../context/AuthContext";
-const avatarModules = import.meta.glob(
-  "../assets/avatars/*.{png,jpg,jpeg,webp}",
-  {
-    eager: true,
-    query: "?url",
-    import: "default",
-  }
-);
-
-const AVATARS = Object.values(avatarModules);
+const AVATARS = [
+  "/avatars/AvatarTechy.png",
+  "/avatars/Avatar_Cool.png",
+  "/avatars/Avatar_Nerd.png",
+  "/avatars/Avatar_Positive.png",
+  "/avatars/Avatar_Romantic.png",
+  "/avatars/Avatar_Scout.png",
+  "/avatars/Avatar_SportsEnthu.png",
+  "/avatars/Avatar_StarrMan.png",
+  "/avatars/Avatar_ViBing.png",
+  "/avatars/Avatar_Winner.png",
+  "/avatars/Avatar_Worm.png",
+  "/avatars/Avatar_chill.png",
+];
 import PostCard from "../components/PostCard";
 
 import {
