@@ -4514,3 +4514,183 @@ main,
     display: none;
   }
 }
+
+/* =========================
+   CREATE COMMUNITY BUTTON
+========================= */
+
+.communities-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.create-community-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 15px;
+
+  background: var(--accent);
+  color: var(--button-text);
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.create-community-button:hover {
+  background: var(--accent-hover);
+  color: var(--button-text);
+  transform: translateY(-1px);
+}
+
+
+/* =========================
+   CREATE COMMUNITY PAGE
+========================= */
+
+.create-community-page {
+  min-height: calc(100vh - 64px);
+  padding: 32px 20px 60px;
+}
+
+.create-community-container {
+  width: min(700px, 94%);
+  margin: 0 auto;
+}
+
+.create-community-card {
+  margin-top: 20px;
+  padding: 28px;
+
+  background: var(--bg-card);
+
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow);
+}
+
+.create-community-heading {
+  margin-bottom: 25px;
+}
+
+.create-community-heading h1 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 28px;
+}
+
+.create-community-heading p {
+  margin-top: 7px;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+}
+
+.create-community-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.form-group label {
+  color: var(--text-primary);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  padding: 12px 13px;
+
+  background: var(--input-bg);
+  color: var(--input-text);
+
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+
+  box-shadow:
+    0 0 0 3px rgba(33, 150, 243, 0.12);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-hint {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.create-community-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 5px;
+}
+
+@media (max-width: 600px) {
+
+  .communities-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .create-community-button {
+    width: 100%;
+  }
+
+  .create-community-card {
+    padding: 20px;
+  }
+
+  .create-community-actions {
+    flex-direction: column-reverse;
+  }
+
+  .create-community-actions > * {
+    width: 100%;
+    text-align: center;
+  }
+
+}

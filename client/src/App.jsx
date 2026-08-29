@@ -13,6 +13,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import CreatePost from "./pages/CreatePost";
 import Navbar from "./components/Navbar";
 import Communities from "./pages/Communities";
+import CreateCommunity from "./pages/CreateCommunity";
 import Community from "./pages/Community";
 import Post from "./pages/Post";
 import SavedPosts from "./pages/SavedPosts";
@@ -40,7 +41,10 @@ return (
         </ProtectedRoute>
       }
     />
-
+    <Route
+      path="/create-community"
+      element={<CreateCommunity />}
+    />
     <Route
       path="/saved"
       element={

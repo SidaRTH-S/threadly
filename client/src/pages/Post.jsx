@@ -10,7 +10,7 @@ import {
 
 import PostCard from "../components/PostCard";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://threadly-server.vercel.app/api";
 
 const Post = () => {
   const { id } = useParams();

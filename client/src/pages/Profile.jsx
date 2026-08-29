@@ -24,13 +24,7 @@ import {
   updateProfile,
 } from "../services/userService";
 
-const API_URL = "http://localhost:5000/api";
-
-/*
-  Built-in avatar choices.
-  These use DiceBear's avatar API,
-  so we don't need to upload image files.
-*/
+const API_URL = "https://threadly-server.vercel.app/api";
 
 
 const Profile = () => {

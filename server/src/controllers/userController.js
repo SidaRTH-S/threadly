@@ -33,7 +33,10 @@ const getUserProfile = async (req, res) => {
       .toLowerCase();
 
     const user = await User.findOne({
-      username,
+      username: {
+        $regex: `^${username}$`,
+        $options: "i",
+      },
     }).select("-password");
 
     if (!user) {
@@ -89,7 +92,10 @@ const getUserPosts = async (req, res) => {
       .toLowerCase();
 
     const user = await User.findOne({
-      username,
+      username: {
+        $regex: `^${username}$`,
+        $options: "i",
+      },
     }).select("_id username");
 
     if (!user) {

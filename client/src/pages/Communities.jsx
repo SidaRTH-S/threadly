@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://threadly-server.vercel.app/api";
 
 const Communities = () => {
   const [communities, setCommunities] = useState([]);
@@ -83,6 +83,13 @@ const Communities = () => {
               conversations you care about.
             </p>
           </div>
+
+          <Link
+            to="/create-community"
+            className="create-community-button"
+          >
+            ➕ Create Community
+          </Link>
         </div>
 
         {communities.length === 0 ? (

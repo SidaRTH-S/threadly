@@ -9,7 +9,7 @@ import {
   leaveCommunity,
 } from "../services/communityService";
 
-const API_URL = "http://localhost:5000/api";
+const API_URL = "https://threadly-server.vercel.app/api";
 
 const Community = () => {
   const { name } = useParams();
