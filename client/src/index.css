@@ -4720,55 +4720,35 @@ main,
   object-fit: cover;
 }
 
-/* =================================
-   FIX COMMENT AVATAR OVERFLOW
-================================= */
+/* ===== COMMENT AVATAR HARD FIX ===== */
 
-.comment-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  min-width: 0;
-}
-
-.comment-avatar {
+.comment-header .comment-avatar {
   width: 32px !important;
   height: 32px !important;
   min-width: 32px !important;
   min-height: 32px !important;
-
   max-width: 32px !important;
   max-height: 32px !important;
 
-  border-radius: 50%;
-  overflow: hidden;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 
-  flex: 0 0 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #e5e7eb;
-  color: #4b5563;
-
-  font-size: 13px;
-  font-weight: 700;
+  overflow: hidden !important;
+  border-radius: 50% !important;
+  flex: 0 0 32px !important;
 }
 
-.comment-avatar img {
+.comment-header .comment-avatar img {
   width: 32px !important;
   height: 32px !important;
-
   min-width: 32px !important;
   min-height: 32px !important;
-
   max-width: 32px !important;
   max-height: 32px !important;
-
-  display: block !important;
 
   object-fit: cover !important;
-  border-radius: 50%;
+  object-position: center !important;
+  display: block !important;
+  border-radius: 50% !important;
 }
