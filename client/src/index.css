@@ -4719,3 +4719,56 @@ main,
   display: block;
   object-fit: cover;
 }
+
+/* =================================
+   FIX COMMENT AVATAR OVERFLOW
+================================= */
+
+.comment-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  min-width: 0;
+}
+
+.comment-avatar {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  max-width: 32px !important;
+  max-height: 32px !important;
+
+  border-radius: 50%;
+  overflow: hidden;
+
+  flex: 0 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #e5e7eb;
+  color: #4b5563;
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.comment-avatar img {
+  width: 32px !important;
+  height: 32px !important;
+
+  min-width: 32px !important;
+  min-height: 32px !important;
+
+  max-width: 32px !important;
+  max-height: 32px !important;
+
+  display: block !important;
+
+  object-fit: cover !important;
+  border-radius: 50%;
+}
