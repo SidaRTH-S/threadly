@@ -62,12 +62,22 @@ const getCommunities = async (req, res) => {
       .populate("owner", "username avatar")
       .sort({ createdAt: -1 });
 
+    const communitiesWithCounts = communities.map(
+      (community) => ({
+        ...community.toObject(),
+        memberCount: community.members.length,
+      })
+    );
+
     return res.status(200).json({
-      count: communities.length,
-      communities,
+      count: communitiesWithCounts.length,
+      communities: communitiesWithCounts,
     });
   } catch (error) {
-    console.error("Get communities error:", error);
+    console.error(
+      "Get communities error:",
+      error
+    );
 
     return res.status(500).json({
       message: "Internal server error",
@@ -105,7 +115,9 @@ const getCommunityByName = async (req, res) => {
 
 const joinCommunity = async (req, res) => {
   try {
-    const communityName = req.params.name.trim().toLowerCase();
+    const communityName = req.params.name
+      .trim()
+      .toLowerCase();
 
     const community = await Community.findOne({
       name: communityName,
@@ -119,29 +131,45 @@ const joinCommunity = async (req, res) => {
 
     const userId = req.user._id;
 
-    // Check whether the user is already a member
+    // Check if already a member
     const isAlreadyMember = community.members.some(
-      (memberId) => memberId.toString() === userId.toString()
+      (memberId) =>
+        memberId.toString() === userId.toString()
     );
 
     if (isAlreadyMember) {
       return res.status(409).json({
-        message: "You are already a member of this community",
+        message:
+          "You are already a member of this community",
       });
     }
 
-    // Add the logged-in user
+    // Add user to community
     community.members.push(userId);
+
+    // Keep count synchronized
+    community.memberCount =
+      community.members.length;
 
     await community.save();
 
+    // Add community to user's joined communities
+    await User.findByIdAndUpdate(userId, {
+      $addToSet: {
+        joinedCommunities: community._id,
+      },
+    });
+
     return res.status(200).json({
       message: "Joined community successfully",
-      memberCount: community.members.length,
+      memberCount: community.memberCount,
       community,
     });
   } catch (error) {
-    console.error("Join community error:", error);
+    console.error(
+      "Join community error:",
+      error
+    );
 
     return res.status(500).json({
       message: "Internal server error",
@@ -151,7 +179,9 @@ const joinCommunity = async (req, res) => {
 
 const leaveCommunity = async (req, res) => {
   try {
-    const communityName = req.params.name.trim().toLowerCase();
+    const communityName = req.params.name
+      .trim()
+      .toLowerCase();
 
     const community = await Community.findOne({
       name: communityName,
@@ -165,39 +195,61 @@ const leaveCommunity = async (req, res) => {
 
     const userId = req.user._id;
 
-    // Check whether the user is a member
+    // Check membership
     const isMember = community.members.some(
-      (memberId) => memberId.toString() === userId.toString()
+      (memberId) =>
+        memberId.toString() === userId.toString()
     );
 
     if (!isMember) {
       return res.status(400).json({
-        message: "You are not a member of this community",
+        message:
+          "You are not a member of this community",
       });
     }
 
-    // Do not allow the owner to leave for now
-    if (community.owner.toString() === userId.toString()) {
+    // Owner cannot leave
+    if (
+      community.owner.toString() ===
+      userId.toString()
+    ) {
       return res.status(400).json({
         message:
           "The community owner cannot leave the community",
       });
     }
 
-    // Remove the logged-in user from members
-    community.members = community.members.filter(
-      (memberId) => memberId.toString() !== userId.toString()
-    );
+    // Remove user from members
+    community.members =
+      community.members.filter(
+        (memberId) =>
+          memberId.toString() !==
+          userId.toString()
+      );
+
+    // Keep count synchronized
+    community.memberCount =
+      community.members.length;
 
     await community.save();
 
+    // Remove community from user's joined communities
+    await User.findByIdAndUpdate(userId, {
+      $pull: {
+        joinedCommunities: community._id,
+      },
+    });
+
     return res.status(200).json({
       message: "Left community successfully",
-      memberCount: community.members.length,
+      memberCount: community.memberCount,
       community,
     });
   } catch (error) {
-    console.error("Leave community error:", error);
+    console.error(
+      "Leave community error:",
+      error
+    );
 
     return res.status(500).json({
       message: "Internal server error",

@@ -75,7 +75,7 @@ export const leaveCommunity = async (
   const response = await fetch(
     `${API_URL}/communities/${communityName}/leave`,
     {
-      method: "POST",
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -86,7 +86,8 @@ export const leaveCommunity = async (
 
   if (!response.ok) {
     throw new Error(
-      data.message || "Failed to leave community"
+      data.message ||
+        "Failed to leave community"
     );
   }
 

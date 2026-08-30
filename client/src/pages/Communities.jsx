@@ -133,11 +133,7 @@ const Communities = () => {
 
                 <div className="community-card-footer">
                   <span>
-                    👥{" "}
-                    {community.memberCount ??
-                      community.members?.length ??
-                      0}{" "}
-                    members
+                    👥 {community.members?.length ?? 0} members
                   </span>
 
                   <span className="community-view">
